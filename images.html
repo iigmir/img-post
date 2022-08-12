@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictures</title>
+    <style>
+    img { max-width: 128px; }
+    </style>
+</head>
+<body>
+    <a href="./form.html">Form</a>
+    <div id="app"></div>
+    <script>
+    fetch( "./api/images-list.php" ).then( r => r.json() ).then( ({ datas }) => {
+        const images = datas.map( (image = { id: 0, path: "", name: "", description: "" }) => {
+            const src = `./images/${image.path}`;
+            return `<img src="${src}" alt="${image.name}" />`;
+        });
+        document.querySelector("#app").innerHTML = images.join("");
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture form</title>
+</head>
+
+<body>
+    <h1>Picture form</h1>
+    <form
+        id="image-upload" class="form-example"
+        action="/imgpost/api/pictures.php" method="post" enctype="multipart/form-data"
+    >
+        <div class="form-example">
+            <label for="avatar">Choose a profile picture:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*, .svg" required aria-required="true" />
+        </div>
+        <div class="form-example">
+            <label for="description">Describe it:</label>
+            <input type="text" id="description" name="description" accept="image/*, .svg" aria-required="false" />
+        </div>
+        <div class="form-example">
+            <input type="submit" value="Upload">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+    <p id="msg"></p>
+    <script>
+    document.querySelector("form#image-upload").addEventListener( "submit", (event) => {
+        event.preventDefault();
+        const { target } = event;
+        const body = new FormData( target );
+        // FIXME: It returns a Promise instead of a JSON object?
+        const upload_image = (target) => {
+            return new Promise( (resolve, reject) => {
+                const ajax = fetch( target.action, {
+                    method: target.method,
+                    body,
+                }).then( response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error("HTTP Error", { cause: response.json() });
+                });
+                ajax.then( r => resolve(r) ).catch( r => reject(r.cause) );
+            });
+        };
+        const ajax = upload_image(target);
+        ajax.then( data => {
+            document.querySelector("p#msg").textContent = data.message;
+        }).catch( error => {
+            error.then( o => {
+                document.querySelector("p#msg").textContent = o.infos;
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

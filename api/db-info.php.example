@@ -1,0 +1,13 @@
+<?php
+function DbLoginInfos()
+{
+    return array(
+        // Database host
+        "host" => "localhost",
+        // Database user
+        "dbuser" => "dbuser",
+        // Database password
+        "dbpassword" => "dbpassword"
+    );
+}
+?>
