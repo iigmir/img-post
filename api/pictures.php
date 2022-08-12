@@ -1,7 +1,7 @@
 
 <?php
-include_once "images.php";
-include_once "pic-func.php";
+include_once "../settings/images.php";
+include_once "../settings/pic-func.php";
 header("Content-type:application/json;charset=utf-8");
 
 if( isset($_FILES["avatar"]) )

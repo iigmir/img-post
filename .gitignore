@@ -1,3 +1,4 @@
 images/*
 !images/.gitkeep
 api/db-info.php
+settings/db-info.php

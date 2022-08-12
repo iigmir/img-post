@@ -1,6 +1,6 @@
 <?php
 define("ACCESS_DB", TRUE);
-include_once "db.php";
+include_once "../settings/db.php";
 $instance = new Database();
 
 header("Content-type:application/json; charset=utf-8;");
