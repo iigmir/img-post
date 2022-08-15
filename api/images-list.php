@@ -1,6 +1,5 @@
 <?php
-define("ACCESS_DB", TRUE);
-include_once "../settings/db.php";
+include_once "../settings/pdo.php";
 $instance = new Database();
 
 header("Content-type:application/json; charset=utf-8;");
