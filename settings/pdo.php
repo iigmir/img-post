@@ -40,9 +40,9 @@ class Database {
             $source = $this->instance->prepare(
                 $sql
             )->execute([
-                $this->instance->quote($img_path),
-                $this->instance->quote($img_name),
-                $this->instance->quote($img_description)
+                $img_path,
+                $img_name,
+                $img_description
             ]);
             $success = false;
             if ($source) {
