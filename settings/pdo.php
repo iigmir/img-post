@@ -19,16 +19,15 @@ class Database {
     }
     public function get_datas()
     {
-        $sql = "SELECT * FROM `$this->table`";
         $this->init_db_connection();
-        $source = $this->instance->exec($sql);
+        $sql = "SELECT * FROM `$this->table`";
+        $source = $this->instance->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         $datas = array();
-        if ($source) {
-            if ( mysqli_num_rows($source) > 0 ) {
-                while ($row = mysqli_fetch_assoc($source))
-                {   // 每跑一次迴圈就抓一筆值，最後放進data陣列中
-                    $datas[] = $row;
-                }
+        if ($source)
+        {
+            foreach ($source as $item)
+            {
+                $datas[] = $item;
             }
         }
         return $datas;
